@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from maskrcnn_benchmark.modeling.box_coder import BoxCoder
 img = rgb_img.tensors[0]
 img = torch.permute(img, (1,2,0)).cpu()
+img = (img-img.min())/(img.max()-img.min()) * 255
 image = np.array(img).astype(np.uint8)
 
 anchor = torch.cat([a.bbox for a in detection_rgb], dim=0)
